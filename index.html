@@ -252,9 +252,23 @@ function cardHTML(item){
     <div class="card">
       <div class="price-tag">${price}</div>
       <div class="card-cat">${cat}</div>
-      <div class="card-img-wrap"><img src="${img}" alt="${name}" loading="lazy"></div>
+      <div class="card-img-wrap"><img src="${img}" alt="${name}"></div>
       <div class="card-name">${name}</div>
     </div>`;
+}
+
+const IMAGE_TIMEOUT_MS = 8000; // don't let one slow/broken image block the whole screen forever
+
+function preloadImage(src){
+  return new Promise((resolve) => {
+    if(!src){ resolve(); return; }
+    const im = new Image();
+    const done = () => resolve();
+    const timer = setTimeout(done, IMAGE_TIMEOUT_MS);
+    im.onload = () => { clearTimeout(timer); done(); };
+    im.onerror = () => { clearTimeout(timer); done(); };
+    im.src = src;
+  });
 }
 
 async function init(){
@@ -268,6 +282,12 @@ async function init(){
     if(!res.ok) throw new Error("HTTP " + res.status);
     const items = await res.json();
     if(!Array.isArray(items) || items.length === 0) throw new Error("Tyhjä syöte");
+
+    // Fetch every image fully into the browser cache BEFORE building any HTML.
+    // This guarantees that when the <img> tags are inserted (eager, no lazy-load),
+    // the animated marquee never scrolls past a card whose image hasn't arrived yet —
+    // which is what caused the blank "second half" cards.
+    await Promise.all(items.map(item => preloadImage(item.image)));
 
     const html = items.map(cardHTML).join("");
     gridA.innerHTML = html;
