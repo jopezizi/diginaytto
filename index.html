@@ -155,6 +155,9 @@
     color:var(--paperi);
     max-width:680px;
   }
+  .cta-text .promo-badge{
+    color:var(--muste);
+  }
   .cta-text span{color:var(--koralli);}
   .cta-url{
     display:block;
@@ -164,6 +167,21 @@
     font-size:22px;
     color:var(--sammal);
     letter-spacing:.5px;
+  }
+  .promo-badge{
+    display:inline-block;
+    margin-top:12px;
+    background:var(--koralli);
+    color:var(--muste);
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:.2px;
+    padding:8px 16px;
+    border-radius:30px;
+  }
+  .promo-badge strong{
+    font-weight:800;
   }
   .qr-box{
     flex:0 0 auto;
@@ -218,10 +236,11 @@
   </div>
 
   <footer>
-    <div class="cta-text">
-      Nämä ja <span>tuhansia muita aarteita</span> verkkokaupastamme.
-      <span class="cta-url">elavakauppa.fi</span>
-    </div>
+  <div class="cta-text">
+        Nämä ja <span>tuhansia muita aarteita</span> verkkokaupastamme.
+        <span class="cta-url">elavakauppa.fi</span>
+        <span class="promo-badge">Matkus Luupin kunniaksi koodilla <strong>LUUPPI10</strong> -10&nbsp;% yli 50&nbsp;€ tilauksista!</span>
+      </div>
     <div class="qr-box">
       <div class="qr-wrap">
         <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&ecc=H&data=https://www.elavakauppa.fi" alt="QR-koodi verkkokauppaan">
