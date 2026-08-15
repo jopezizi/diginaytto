@@ -123,6 +123,13 @@
     overflow:hidden;
     min-height:56px;
   }
+  .card-model{
+    font-family:'Manrope',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--koralli-teksti);
+    margin-top:4px;
+  }
   .price-tag{
     position:absolute;
     top:-10px;right:-10px;
@@ -265,6 +272,7 @@ function formatPrice(p){
 function cardHTML(item){
   const img = item.image || "";
   const name = item.name || "";
+  const model = item.model || "";
   const cat = item.category || "";
   const price = item.price != null ? formatPrice(item.price) : "";
   return `
@@ -273,6 +281,7 @@ function cardHTML(item){
       <div class="card-cat">${cat}</div>
       <div class="card-img-wrap"><img src="${img}" alt="${name}"></div>
       <div class="card-name">${name}</div>
+      ${model ? `<div class="card-model">${model}</div>` : ""}
     </div>`;
 }
 
