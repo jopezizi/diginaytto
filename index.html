@@ -260,6 +260,18 @@ const FEED_URL = "https://gist.githubusercontent.com/jopezizi/fbc0bdd55aa208a47f
 const SECONDS_PER_ROW = 7.5;      // scroll pace per card-row (tune for readability)
 const RELOAD_MINUTES = 30;        // full reload interval (picks up 04:00 daily refresh)
 
+const SITE_ORIGIN = "https://www.elavakauppa.fi";
+
+// Muuttaa suhteelliset kuvalinkit (/storage/... tai storage/...) absoluuttisiksi.
+// Täydet http(s)-osoitteet jätetään ennalleen.
+function fullImageUrl(src){
+  if(!src) return "";
+  src = String(src).trim();
+  if(/^https?:\/\//i.test(src)) return src;
+  if(src.startsWith("//")) return "https:" + src;
+  return SITE_ORIGIN + (src.startsWith("/") ? "" : "/") + src;
+}
+
 function formatPrice(p){
   return Number(p).toFixed(0) + " €";
 }
@@ -305,6 +317,9 @@ async function init(){
     if(!res.ok) throw new Error("HTTP " + res.status);
     const items = await res.json();
     if(!Array.isArray(items) || items.length === 0) throw new Error("Tyhjä syöte");
+
+    // Lisää elavakauppa.fi kuvalinkkien eteen ennen esilatausta ja renderöintiä
+    items.forEach(item => { item.image = fullImageUrl(item.image); });
 
     // Fetch every image fully into the browser cache BEFORE building any HTML.
     // This guarantees that when the <img> tags are inserted (eager, no lazy-load),
