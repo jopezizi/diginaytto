@@ -3,349 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, initial-scale=1">
-<title>Elävä Kauppa – Tämän päivän löydöt</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Elävä Kauppa, päivän poiminnat</title>
 <style>
+  @font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:300 800;font-display:swap;src:url("assets/bricolage-latin.woff2") format("woff2");}
+  /* Samat värit ja muodot kuin verkkokaupan overlayssa (packages/ui/src/tokens.css) */
   :root{
-    --vihrea:#00774A;
-    --koralli:#FBAB97;
-    --sammal:#D8E9A2;
-    --paperi:#FBF9F4;
-    --muste:#1A1A17;
-    --koralli-teksti:#C85A3E;
+    --ek-vihrea:#00774a; --ek-vihrea-tumma:#005c39; --ek-sammal:#c5d8af; --ek-koralli:#fbab97;
+    --ek-valkoinen:#fff; --ek-musta:#000; --ek-kerma:#f5efe3; --ek-paperi:#fffdf8; --ek-teksti-2:#5b5346;
+    --ek-vihrea-tumma:#005c39; --ek-rae:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --ek-varjo-kortti:0 0 0 1px rgba(70,45,15,.06),0 2px 4px rgba(70,45,15,.04),0 14px 28px -16px rgba(70,45,15,.35);
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{
-    width:1080px;height:1920px;
-    background:var(--vihrea);
-    overflow:hidden;
-    font-family:'Manrope',sans-serif;
-    color:var(--muste);
-  }
-  .screen{
-    width:1080px;height:1920px;
-    display:flex;flex-direction:column;
-    position:relative;
-  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ek-vihrea);color:var(--ek-musta);font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .ek-naytto{width:1080px;height:1920px;display:flex;flex-direction:column}
 
-  /* ---------- HEADER ---------- */
-  header{
-    flex:0 0 auto;
-    background:var(--vihrea);
-    padding:56px 56px;
-    position:relative;
-    z-index:3;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .kicker{
-    font-family:'Bricolage Grotesque',sans-serif;
-    font-size:58px;
-    font-weight:800;
-    color:var(--paperi);
-    letter-spacing:-.5px;
-    text-align:center;
-  }
+  /* Otsikko: perusnäkymä kermalla kuten etusivun hero, Green Week -viikolla vihreä nosto */
+  .ek-otsikko{flex:none;position:relative;overflow:hidden;background:var(--ek-kerma);color:var(--ek-musta);padding:56px 56px 40px;z-index:3;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+  .ek-otsikko__logo{display:block;width:230px;height:auto;margin-bottom:22px}
+  .ek-otsikko h1{font-size:92px;font-weight:800;letter-spacing:-.035em;line-height:.98}
+  .ek-korostus{font-style:normal;color:var(--ek-vihrea);padding:0 4px;background:linear-gradient(transparent 55%,var(--ek-sammal) 55% 92%,transparent 92%)}
+  .ek-gw{display:none}
+  body[data-gw="paalla"] .ek-otsikko{color:var(--ek-paperi);background:radial-gradient(circle at 100% 0,var(--ek-sammal) 0 130px,transparent 132px),radial-gradient(circle at 0 100%,var(--ek-koralli) 0 100px,transparent 102px),var(--ek-vihrea);min-height:300px;justify-content:center}
+  body[data-gw="paalla"] .ek-otsikko__logo{display:none}
+  body[data-gw="paalla"] .ek-perus{display:none}
+  body[data-gw="paalla"] .ek-gw{display:block;padding-right:190px}
+  .ek-gw h1{text-align:left;font-size:72px}
+  .ek-gw p{margin-top:14px;font-size:30px;font-weight:600;line-height:1.3}
+  .ek-gw__lappu{position:absolute;top:44px;right:56px;display:grid;place-items:center;width:150px;height:150px;border-radius:50%;background:var(--ek-koralli);color:var(--ek-musta);font-weight:800;font-size:46px;letter-spacing:-.03em;transform:rotate(10deg);box-shadow:0 0 0 5px var(--ek-paperi)}
 
-  /* ---------- SCROLL AREA ---------- */
-  .viewport{
-    flex:1 1 auto;
-    overflow:hidden;
-    background:var(--paperi);
-    position:relative;
-  }
-  .viewport::before,.viewport::after{
-    content:"";
-    position:absolute;left:0;right:0;height:70px;
-    z-index:2;pointer-events:none;
-  }
-  .viewport::before{top:0;background:linear-gradient(var(--paperi),transparent);}
-  .viewport::after{bottom:0;background:linear-gradient(transparent,var(--paperi));}
+  /* Vierityskortit */
+  .ek-ikkuna{flex:1 1 auto;position:relative;overflow:hidden;background:var(--ek-kerma)}
+  .ek-ikkuna::before,.ek-ikkuna::after{content:"";position:absolute;left:0;right:0;height:60px;z-index:2;pointer-events:none}
+  .ek-ikkuna::before{top:0;background:linear-gradient(var(--ek-kerma),transparent)}
+  .ek-ikkuna::after{bottom:0;background:linear-gradient(transparent,var(--ek-kerma))}
+  .ek-rata{display:flex;flex-direction:column;will-change:transform;animation:ylos linear infinite;animation-duration:80s}
+  @keyframes ylos{to{transform:translateY(-50%)}}
+  .ek-ikkuna::before{opacity:.9}
+  .ek-ikkuna .ek-rae{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--ek-rae);opacity:.16}
+  .ek-ruudukko{display:grid;grid-template-columns:1fr 1fr;gap:56px 44px;padding:64px 52px 0}
+  .ek-ruudukko+.ek-ruudukko{padding-top:56px}
 
-  .track{
-    display:flex;flex-direction:column;
-    width:100%;
-    will-change:transform;
-    animation:scrollUp linear infinite;
-  }
-  @keyframes scrollUp{
-    from{transform:translateY(0);}
-    to{transform:translateY(-50%);}
-  }
+  /* Vedos: valkoinen reunus, teippi, pieni kallistus (sama kieli kuin overlayn paperikomponentit) */
+  .ek-kortti{--r:-1.4deg;position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;padding:14px 14px 26px;background:var(--ek-valkoinen);border-radius:3px;box-shadow:0 1px 1px rgba(0,0,0,.08),0 6px 14px -4px rgba(70,45,15,.25),0 22px 40px -18px rgba(70,45,15,.35);transform:rotate(var(--r))}
+  .ek-kortti:nth-child(4n+2){--r:1.2deg;margin-top:44px}
+  .ek-kortti:nth-child(4n+3){--r:.9deg}
+  .ek-kortti:nth-child(4n+4){--r:-1deg;margin-top:44px}
+  .ek-kortti::before{content:"";position:absolute;z-index:2;top:-14px;left:50%;width:110px;height:32px;margin-left:-55px;background:color-mix(in srgb,var(--ek-sammal) 78%,transparent);transform:rotate(-4deg);mask:linear-gradient(90deg,transparent 0 4px,#000 4px calc(100% - 4px),transparent 0),repeating-linear-gradient(transparent 0 4px,#000 4px 8px);mask-composite:intersect}
+  .ek-kortti:nth-child(even)::before{background:color-mix(in srgb,var(--ek-koralli) 72%,transparent);transform:rotate(5deg)}
+  .ek-kortti__kuva{position:relative;aspect-ratio:1;overflow:hidden;background:#f3f0ea}
+  .ek-kortti__kuva img{display:block;width:100%;height:100%;object-fit:cover}
+  .ek-lappu{position:absolute;z-index:4;top:-20px;right:-20px;padding:8px 20px 8px 34px;border-radius:8px;background:var(--ek-koralli);color:var(--ek-musta);font-size:36px;font-weight:800;line-height:1.2;transform:rotate(7deg);box-shadow:0 6px 12px -6px rgba(140,60,30,.7)}
+  .ek-lappu::before{content:"";position:absolute;left:11px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--ek-valkoinen);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+  .ek-kortti__merkki{margin:20px 6px 0;min-height:1.2em;color:var(--ek-vihrea-tumma);font-size:24px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ek-kortti__nimi{margin:2px 6px 0;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.3em}
+  .ek-kortti__hinta{margin:10px 6px 0;display:flex;align-items:baseline;gap:16px}
+  .ek-kortti__hinta b{font-size:46px;font-weight:800}
+  .ek-kortti__hinta s{font-size:28px;font-weight:600;color:var(--ek-teksti-2)}
+  .ek-kortti--ale .ek-kortti__hinta b{color:var(--ek-vihrea)}
+  .ek-kortti--odota{height:640px;opacity:.6}
 
-  .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
-    padding:40px 40px 8px;
-  }
-
-  .card{
-    background:#fff;
-    border-radius:22px;
-    padding:18px 18px 22px;
-    display:flex;flex-direction:column;
-    box-shadow:0 6px 18px rgba(26,26,23,.07);
-    position:relative;
-  }
-  .card-cat{
-    font-size:15px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    color:var(--koralli-teksti);
-    margin-bottom:10px;
-  }
-  .card-img-wrap{
-    background:var(--paperi);
-    border-radius:14px;
-    height:300px;
-    display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-    margin-bottom:14px;
-  }
-  .card-img-wrap img{
-    max-width:100%;max-height:100%;
-    object-fit:contain;
-  }
-  .card-name{
-    font-family:'Bricolage Grotesque',sans-serif;
-    font-weight:700;
-    font-size:23px;
-    line-height:1.22;
-    color:var(--muste);
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-    min-height:56px;
-  }
-  .card-model{
-    font-family:'Manrope',sans-serif;
-    font-weight:600;
-    font-size:16px;
-    color:var(--koralli-teksti);
-    margin-top:4px;
-  }
-  .price-tag{
-    position:absolute;
-    top:-10px;right:-10px;
-    background:var(--vihrea);
-    color:var(--paperi);
-    font-family:'Bricolage Grotesque',sans-serif;
-    font-weight:800;
-    font-size:24px;
-    padding:10px 16px 9px;
-    border-radius:40px 40px 40px 6px;
-    box-shadow:0 4px 10px rgba(26,26,23,.18);
-    transform:rotate(4deg);
-  }
-
-  /* ---------- FOOTER / CTA ---------- */
-  footer{
-    flex:0 0 auto;
-    background:var(--muste);
-    padding:38px 56px 44px;
-    display:flex;align-items:center;justify-content:space-between;
-    gap:36px;
-    position:relative;
-    z-index:3;
-  }
-  .cta-text{
-    font-family:'Bricolage Grotesque',sans-serif;
-    font-weight:800;
-    font-size:32px;
-    line-height:1.2;
-    color:var(--paperi);
-    max-width:680px;
-  }
-  .cta-text span{color:var(--koralli);}
-  .cta-url{
-    display:block;
-    margin-top:10px;
-    font-family:'Manrope',sans-serif;
-    font-weight:600;
-    font-size:22px;
-    color:var(--sammal);
-    letter-spacing:.5px;
-  }
-  .cta-text .promo-badge{
-    display:inline-block;
-    margin-top:12px;
-    background:var(--koralli);
-    color:var(--muste);
-    font-family:'Manrope',sans-serif;
-    font-weight:700;
-    font-size:16px;
-    letter-spacing:.2px;
-    padding:7px 14px;
-    border-radius:30px;
-    white-space:nowrap;
-  }
-  .qr-box{
-    flex:0 0 auto;
-    background:var(--paperi);
-    border-radius:18px;
-    padding:14px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .qr-wrap{
-    position:relative;
-    width:150px;height:150px;
-  }
-  .qr-code{display:block;width:150px;height:150px;}
-  .qr-logo{
-    position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:56px;height:56px;
-    border-radius:50%;
-    background:#fff;
-    border:3px solid var(--paperi);
-    box-shadow:0 2px 6px rgba(26,26,23,.25);
-    display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-  }
-  .qr-logo img{
-    width:100%;height:100%;
-    border-radius:50%;
-    object-fit:cover;
-  }
-
-  .fallback{
-    padding:80px 56px;
-    font-size:26px;
-    color:var(--muste);
-    font-weight:600;
-  }
+  /* Alapalkki */
+  .ek-ala{flex:none;display:flex;align-items:center;justify-content:space-between;gap:36px;padding:38px 56px 44px;background:var(--ek-vihrea);color:var(--ek-valkoinen);z-index:3}
+  .ek-ala__logo{display:block;width:260px;height:auto;margin-bottom:18px}
+  .ek-ala__teksti{font-size:34px;font-weight:800;line-height:1.2;max-width:700px}
+  .ek-ala__teksti em{font-style:normal;color:var(--ek-koralli)}
+  .ek-ala__url{display:block;margin-top:8px;font-size:30px;font-weight:700;color:var(--ek-sammal)}
+  .ek-ala__toimitus{display:inline-block;margin-top:14px;padding:8px 18px;border-radius:999px;background:var(--ek-koralli);color:var(--ek-musta);font-size:20px;font-weight:700}
+  .ek-qr{flex:none;background:var(--ek-paperi);border-radius:18px;padding:14px}
+  .ek-qr div{position:relative;width:150px;height:150px}
+  .ek-qr img.koodi{display:block;width:150px;height:150px}
+  .ek-qr .logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:#fff;border:3px solid var(--ek-paperi);overflow:hidden}
+  .ek-qr .logo img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
-<body>
-<div class="screen">
-
-  <header>
-    <div class="kicker">Päivän poiminnat <span>verkkokaupastamme</span></div>
+<body data-gw="pois">
+<div class="ek-naytto">
+  <header class="ek-otsikko">
+    <img class="ek-otsikko__logo ek-perus" src="assets/logo-vihrea.svg" alt="Elävä Kauppa">
+    <h1 class="ek-perus">Päivän poiminnat<br><span class="ek-korostus">verkkokaupastamme</span></h1>
+    <div class="ek-gw">
+      <h1>Elävän Green Week 23.-29.11.</h1>
+      <p>Alennuksia verkkokaupassa koko viikon. Osta uuden sijaan käytettynä.</p>
+      <span class="ek-gw__lappu">-20&nbsp;%</span>
+    </div>
   </header>
-
-  <div class="viewport">
-    <div class="track" id="track">
-      <div class="grid" id="grid-a"></div>
-      <div class="grid" id="grid-b"></div>
+  <main class="ek-ikkuna"><div class="ek-rae"></div>
+    <div class="ek-rata" id="track"><div class="ek-ruudukko" id="grid-a"><article class="ek-kortti ek-kortti--odota"><div class="ek-kortti__kuva"></div></article><article class="ek-kortti ek-kortti--odota"><div class="ek-kortti__kuva"></div></article><article class="ek-kortti ek-kortti--odota"><div class="ek-kortti__kuva"></div></article><article class="ek-kortti ek-kortti--odota"><div class="ek-kortti__kuva"></div></article></div><div class="ek-ruudukko" id="grid-b"></div></div>
+  </main>
+  <footer class="ek-ala">
+    <div>
+      <div class="ek-ala__teksti">Nämä ja <em>tuhansia muita aarteita</em> verkkokaupassamme.<span class="ek-ala__url">elavakauppa.fi</span></div>
+      <span class="ek-ala__toimitus">Ilmainen toimitus yli 50&nbsp;€ tilauksille · Nouto Matkus Luupista 0&nbsp;€</span>
     </div>
-  </div>
-
-  <footer>
-  <div class="cta-text">
-        Nämä ja <span>tuhansia muita aarteita</span> verkkokaupastamme.
-        <span class="cta-url">elavakauppa.fi</span>
-        <span class="promo-badge">Ilmainen toimitus yli 50&nbsp;€ tilauksille · Nouto Matkus Luupista 0&nbsp;€!</span>
-      </div>
-    <div class="qr-box">
-      <div class="qr-wrap">
-        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&ecc=H&data=https://www.elavakauppa.fi" alt="QR-koodi verkkokauppaan">
-        <div class="qr-logo">
-          <img src="https://www.elavakauppa.fi/storage/editor_files/Materiaalit2026/Logot/FAVICO.svg" alt="">
-        </div>
-      </div>
-    </div>
+    <div class="ek-qr"><div>
+      <img class="koodi" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&ecc=H&data=https://www.elavakauppa.fi" alt="QR-koodi verkkokauppaan">
+      <span class="logo"><img src="https://www.elavakauppa.fi/storage/editor_files/Materiaalit2026/Logot/FAVICO.svg" alt=""></span>
+    </div></div>
   </footer>
-
 </div>
-
-<script>
-const FEED_URL = "https://gist.githubusercontent.com/jopezizi/fbc0bdd55aa208a47f6defd9468fca9f/raw/trendit.json";
-const SECONDS_PER_ROW = 7.5;      // scroll pace per card-row (tune for readability)
-const RELOAD_MINUTES = 30;        // full reload interval (picks up 04:00 daily refresh)
-
-const SITE_ORIGIN = "https://www.elavakauppa.fi";
-
-// Muuttaa suhteelliset kuvalinkit (/storage/... tai storage/...) absoluuttisiksi.
-// Täydet http(s)-osoitteet jätetään ennalleen.
-function fullImageUrl(src){
-  if(!src) return "";
-  src = String(src).trim();
-  if(/^https?:\/\//i.test(src)) return src;
-  if(src.startsWith("//")) return "https:" + src;
-  return SITE_ORIGIN + (src.startsWith("/") ? "" : "/") + src;
-}
-
-function formatPrice(p){
-  return Number(p).toFixed(0) + " €";
-}
-
-function cardHTML(item){
-  const img = item.image || "";
-  const name = item.name || "";
-  const model = item.model || "";
-  const cat = item.category || "";
-  const price = item.price != null ? formatPrice(item.price) : "";
-  return `
-    <div class="card">
-      <div class="price-tag">${price}</div>
-      <div class="card-cat">${cat}</div>
-      <div class="card-img-wrap"><img src="${img}" alt="${name}"></div>
-      <div class="card-name">${name}</div>
-      ${model ? `<div class="card-model">${model}</div>` : ""}
-    </div>`;
-}
-
-const IMAGE_TIMEOUT_MS = 8000; // don't let one slow/broken image block the whole screen forever
-
-function preloadImage(src){
-  return new Promise((resolve) => {
-    if(!src){ resolve(); return; }
-    const im = new Image();
-    const done = () => resolve();
-    const timer = setTimeout(done, IMAGE_TIMEOUT_MS);
-    im.onload = () => { clearTimeout(timer); done(); };
-    im.onerror = () => { clearTimeout(timer); done(); };
-    im.src = src;
-  });
-}
-
-async function init(){
-  const viewport = document.querySelector('.viewport');
-  const track = document.getElementById('track');
-  const gridA = document.getElementById('grid-a');
-  const gridB = document.getElementById('grid-b');
-
-  try{
-    const res = await fetch(FEED_URL, {cache:"no-store"});
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    const items = await res.json();
-    if(!Array.isArray(items) || items.length === 0) throw new Error("Tyhjä syöte");
-
-    // Lisää elavakauppa.fi kuvalinkkien eteen ennen esilatausta ja renderöintiä
-    items.forEach(item => { item.image = fullImageUrl(item.image); });
-
-    // Fetch every image fully into the browser cache BEFORE building any HTML.
-    // This guarantees that when the <img> tags are inserted (eager, no lazy-load),
-    // the animated marquee never scrolls past a card whose image hasn't arrived yet —
-    // which is what caused the blank "second half" cards.
-    await Promise.all(items.map(item => preloadImage(item.image)));
-
-    const html = items.map(cardHTML).join("");
-    gridA.innerHTML = html;
-    gridB.innerHTML = html; // duplicate for seamless loop
-
-    // Let images lay out, then size the scroll animation to content height
-    requestAnimationFrame(() => {
-      const rows = Math.ceil(items.length / 2);
-      const duration = Math.max(rows * SECONDS_PER_ROW, 30);
-      track.style.animationDuration = duration + "s";
-    });
-
-  }catch(err){
-    viewport.innerHTML = `<div class="fallback">Löytöjä ei juuri nyt saatavilla.<br>elavakauppa.fi</div>`;
-    console.error("trendit.json-haku epäonnistui:", err);
-  }
-}
-
-init();
-setTimeout(() => location.reload(), RELOAD_MINUTES * 60 * 1000);
-</script>
+<script type="module">import { kaynnista } from "./assets/naytto.mjs"; kaynnista();</script>
 </body>
 </html>
