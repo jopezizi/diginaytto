@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, initial-scale=1">
 <title>Elävä Kauppa, päivän poiminnat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-  @font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:300 800;font-display:swap;src:url("assets/bricolage-latin.woff2") format("woff2");}
   /* Samat värit ja muodot kuin verkkokaupan overlayssa (packages/ui/src/tokens.css) */
   :root{
     --ek-vihrea:#00774a; --ek-vihrea-tumma:#005c39; --ek-sammal:#c5d8af; --ek-koralli:#fbab97;
@@ -79,7 +81,7 @@
 <body data-gw="pois">
 <div class="ek-naytto">
   <header class="ek-otsikko">
-    <img class="ek-otsikko__logo ek-perus" src="assets/logo-vihrea.svg" alt="Elävä Kauppa">
+    <img class="ek-otsikko__logo ek-perus" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI1NyAyNTcgMTA2NCA0ODYiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMwMDc3NGE7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxMDMwLjQ5IDM0NC4xNSA5NzguNDEgNTQ3LjY5IDkyNi4zMSAzNDQuMTUgODgzLjQ0IDM0NC4xNSA5NDIuNTcgNTc1LjE3IDEwMTQuMjYgNTc1LjE3IDEwNzMuMzcgMzQ0LjE1IDEwMzAuNDkgMzQ0LjE1Ii8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTcxLjIyLDQ4Ni4wMXYtMjIwLjY3aC00MS41NHYyMjAuNjdjMCwyNy42OCw4LjI4LDUwLjg1LDIzLjkzLDY3LjAxLDE2LjIsMTYuNzIsMzkuOTMsMjUuNTYsNjguNjQsMjUuNTZ2LTQxLjU0Yy0zNC4zNCwwLTUxLjAzLTE2LjY5LTUxLjAzLTUxLjAzWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg2NC42Myw0MTcuOThjLTIzLjU2LTY0LjQ1LTYxLjk2LTc3Ljk3LTkwLjAyLTc3Ljk3LTMxLjYyLDAtNjAuOTcsMTEuNzYtODQuODgsMzQuMDEtMjAuMTgsMTguNzgtMzUuOTEsNDQuODEtNDQuMjcsNzMuMjgtMTUuNSw1Mi43My0zLjg1LDEwMC43NSwyOS42OCwxMjIuMzMsMTAuNTMsNi43OCwyNC4zMywxMS43Niw0Mi4xNiwxMS43NiwyOS42NSwwLDcwLjQyLTEzLjc5LDEyNS43Mi01Ni4wNCwxLjE0LDE1LjY2LDEuNzEsMzIuMzIsMS43MSw0OS44NGg0MS41NGMwLTY0LjEtNy40OC0xMTguNDYtMjEuNjQtMTU3LjJaTTY5Ny42MSw1MzQuNjljLTE3LjExLTExLjAxLTIyLjE3LTQyLjEzLTEyLjMxLTc1LjY4LDEwLjUxLTM1Ljc0LDQwLjItNzcuNDcsODkuMy03Ny40Nyw4LjAzLDAsMzIuNDgsMCw1MS4wMSw1MC42OSw0LjY5LDEyLjgyLDguNTQsMjcuNzcsMTEuNTQsNDQuNTctOTIuMjQsNzcuNDQtMTMwLDY0LjAyLTEzOS41Myw1Ny44OFoiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03MTguMzIsMzE3LjFjMTYuMTUsMCwyNy42MS0xMi4zNiwyNy42MS0yNy42MXMtMTEuNDYtMjcuNjEtMjcuNjEtMjcuNjEtMjcuNjEsMTIuMzYtMjcuNjEsMjcuNjEsMTEuNjgsMjcuNjEsMjcuNjEsMjcuNjFaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNODA2LjY0LDMxNy4xYzE2LjE1LDAsMjcuNjEtMTIuMzYsMjcuNjEtMjcuNjFzLTExLjQ2LTI3LjYxLTI3LjYxLTI3LjYxLTI3LjYxLDEyLjM2LTI3LjYxLDI3LjYxLDExLjY4LDI3LjYxLDI3LjYxLDI3LjYxWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTExNTAuMDQsMzE3LjFjMTYuMTUsMCwyNy42MS0xMi4zNiwyNy42MS0yNy42MXMtMTEuNDYtMjcuNjEtMjcuNjEtMjcuNjEtMjcuNjEsMTIuMzYtMjcuNjEsMjcuNjEsMTEuNjgsMjcuNjEsMjcuNjEsMjcuNjFaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTIzOC4zNywzMTcuMWMxNi4xNSwwLDI3LjYxLTEyLjM2LDI3LjYxLTI3LjYxcy0xMS40Ni0yNy42MS0yNy42MS0yNy42MS0yNy42MSwxMi4zNi0yNy42MSwyNy42MSwxMS42OCwyNy42MSwyNy42MSwyNy42MVoiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMTQ5LjAyLDU4MS4zOWMyOS42NSwwLDcwLjQyLTEzLjc5LDEyNS43Mi01Ni4wNSwxLjE0LDE1LjY2LDEuNzEsMzIuMzIsMS43MSw0OS44NGg0MS41NGMwLTY0LjEtNy40OC0xMTguNDYtMjEuNjQtMTU3LjItMjMuNTYtNjQuNDUtNjEuOTYtNzcuOTctOTAuMDItNzcuOTctMzEuNjIsMC02MC45NywxMS43Ni04NC44OCwzNC4wMS0yMC4xOCwxOC43OC0zNS45MSw0NC44MS00NC4yOCw3My4yOC0xNS41LDUyLjczLTMuODUsMTAwLjc1LDI5LjY4LDEyMi4zMywxMC41Myw2Ljc4LDI0LjMzLDExLjc2LDQyLjE2LDExLjc2Wk0xMTE3LjAzLDQ1OS4wMWMxMC41LTM1LjczLDQwLjItNzcuNDcsODkuMy03Ny40Nyw4LjAzLDAsMzIuNDgsMCw1MS4wMSw1MC42OSw0LjY5LDEyLjgyLDguNTQsMjcuNzcsMTEuNTQsNDQuNTctOTIuMjQsNzcuNDQtMTMwLjAxLDY0LjAyLTEzOS41NCw1Ny44OC0xNy4xMS0xMS4wMS0yMi4xNy00Mi4xMy0xMi4zMS03NS42OFoiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zODMuOTUsNTQwLjA1Yy0yOC4wMi00LjI4LTU1LjMtMTQuNjktNzMuNDYtMzYuMTktMTAuMjYtMTIuNS0xNC41LTI3LjcxLTkuNTctNDIuOTIsMS43MS01LjA1LDQuMTctOS43Myw3LjItMTQuMDIsMzguNjMsMjQuOTEsODYuNjMsMzEuODEsMTMxLjgsMjQuNjMsMjEuNTgtMy45OCw0Ni43Ny0xNC4wNSw1NS45OS0zNi4xNCw1LjgyLTE0LjE4LDIuNy0zMS40LTcuNjMtNDIuNy0zMS4wMi0zMy40OS05OS4xNC0zMC4xOS0xMzkuNDQtMTcuOTctMTQuMTIsNC4xLTI4LjE0LDEwLjQ1LTQwLjc0LDE4LjczLS43NC0xLTEuNDUtMi4wNi0yLjE1LTMuMTItOC40MS0xMy41OS05LjU1LTI5LjEtMi4yNy00My4zMSwxNy41NS0zMi4yNiw1OC44LTQ1LjksOTQuNTItNDcuOTYsOS43Ni0uNTQsMTkuNjMtLjE5LDI5LjM0Ljk5LDE5LjMyLDIuMzksMzguMiw4LjI3LDU0LjA5LDE3LjgxbDIwLjU4LTM0LjA4Yy0yMS43Ny0xMy4wMi00NS43MS0yMC4yMi02OS44MS0yMy4yMy00OC42Mi01LjcxLTEwMS4zNCw0LjU1LTEzOS4yNiwzNi45OS0yMC42NSwxNy4zOC0zNS45Nyw0NS4zMy0zMy45OCw3My4zNy44MywxOC4yOCw4LjI5LDM1LjI2LDE5LjI1LDQ5LjM1LTE1LjQyLDE5LjU5LTIzLjM3LDQzLjkzLTE3LjQxLDcxLjM4LDYuMzMsMjcuNDIsMjUuMTgsNDguNSw0Ny45Niw2My4wNyw2MS43LDM4LjM2LDE1Mi4wNywzNi4wNCwyMDkuMzEtOS4zOGwtMjUuMjUtMzAuNzZjLTMwLjA4LDIzLjg1LTcxLjU1LDMwLjQ1LTEwOS4wOCwyNS40NlpNMzQxLjUzLDQyMC4yNGMuNC0uMTkuOC0uMzYsMS4yLS41NSw1LjQ5LTIuODgsMjkuMTUtMTQuMzYsNTcuNS0xNC4zNiwzMS41OCwwLDU3LjMzLDYuMzgsNTguNjQsMTQuMzcuMDcuNDIuMDMuOTguMDIsMS4wNC0uODQsOC4xLTI2Ljc3LDE0LjYxLTU4LjY2LDE0LjYxcy01OC43LTE1LjAxLTU4LjctMTUuMDFjMCwwLC4wNC0uMDIuMS0uMDUtLjAzLS4wMi0uMDYtLjAzLS4xLS4wNFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iOTMzLjUgNjA4IDkxNy45OSA2MDggODc0LjM4IDY1NC44IDg3NC4zOCA2MDggODYyLjA1IDYwOCA4NjIuMDUgNzA3LjY5IDg3NC4zOCA3MDcuNjkgODc0LjM4IDY1OC45NSA5MjEuMTEgNzA3LjY5IDkzNy4wMyA3MDcuNjkgODg4LjIyIDY1Ni4zOSA5MzMuNSA2MDgiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik05OTkuMTIsNjQ1LjQ1Yy0yLjEyLTQuODktNS42Mi04LjU1LTEwLjQ5LTEwLjk3LTQuODctMi40Mi0xMC43LTMuNjQtMTcuNDgtMy42NC04LjQ1LDAtMTUuMjYsMS44Ny0yMC40Myw1LjYxcy04LjY1LDguODktMTAuNDUsMTUuNDRsMTEuNywzLjUzYzEuMzgtNC42MSwzLjc3LTcuOTUsNy4xNy0xMCwzLjM5LTIuMDUsNy4zNS0zLjA4LDExLjg3LTMuMDgsNi44MywwLDExLjY0LDEuNTksMTQuNDQsNC43OCwyLjUxLDIuODYsMy44Myw3LjE0LDMuOTcsMTIuOC0yLjYzLjM2LTUuMzYuNzMtOC4yMywxLjExLTQuNTIuNi04Ljk5LDEuMjYtMTMuNCwxLjk3LTQuNDEuNzItOC4zOSwxLjU2LTExLjk0LDIuNTMtMy43OSwxLjExLTcuMDQsMi42Mi05Ljc2LDQuNTQtMi43MiwxLjkyLTQuODMsNC4zMi02LjM0LDcuMi0xLjUsMi44OS0yLjI1LDYuMjktMi4yNSwxMC4yMXMuOTYsNy43MSwyLjg3LDExLjA4YzEuOTIsMy4zNyw0Ljc1LDYuMDgsOC41Miw4LjE0czguNDQsMy4wOCwxNC4wMiwzLjA4YzcuMjQsMCwxMy40LTEuNTUsMTguNDUtNC42NCwzLjY4LTIuMjUsNi43NS01LjI5LDkuMjQtOS4xdjExLjY2aDEwLjk0di00Ni4yNWMwLTIuOTUtLjE0LTUuNzgtLjQyLTguNDgtLjI4LTIuNy0uOTUtNS4yLTIuMDEtNy41MVpNOTg4LjA0LDY4Mi4yMmMtLjYsMy4wOS0xLjg5LDUuOTQtMy44OCw4LjU1LTEuOTgsMi42MS00LjYsNC43MS03Ljg2LDYuMy0zLjI2LDEuNTktNy4xLDIuMzktMTEuNTMsMi4zOS0zLjU2LDAtNi40My0uNTgtOC42Mi0xLjczLTIuMTktMS4xNS0zLjgxLTIuNjUtNC44NS00LjUtMS4wNC0xLjg0LTEuNTYtMy43OC0xLjU2LTUuODEsMC0yLjM1LjU0LTQuMzMsMS42My01LjkyLDEuMDgtMS41OSwyLjUyLTIuOSw0LjI5LTMuOTEsMS43Ny0xLjAxLDMuNjgtMS44NCw1LjcxLTIuNDksMi43Ny0uNzgsNS44OS0xLjQ3LDkuMzUtMi4wNCwzLjQ2LS41OCw3LjEzLTEuMTIsMTEuMDEtMS42MywyLjQ4LS4zMiw0Ljk5LS42Niw3LjUzLTEtLjAyLDEuMTctLjA0LDIuNTItLjA4LDQuMDktLjA3LDIuODQtLjQ1LDUuNDEtMS4xNCw3LjcyWiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwNjguMDEsNjcyLjMxYzAsNC4yOS0uNDksOC4wNi0xLjQ2LDExLjI5LS45NywzLjIzLTIuMzUsNS45LTQuMTUsOC0xLjgsMi4xLTMuOTcsMy42OC02LjUxLDQuNzQtMi41NCwxLjA2LTUuMzUsMS41OS04LjQ1LDEuNTktMy45MiwwLTcuMTktLjc2LTkuOC0yLjI5LTIuNjEtMS41Mi00LjY5LTMuNi02LjIzLTYuMjMtMS41NS0yLjYzLTIuNjQtNS41OC0zLjI5LTguODYtLjY1LTMuMjgtLjk3LTYuNjctLjk3LTEwLjE4di0zNy40NmgtMTIuNDZ2NDEuMzNjMCwyLjgyLjI2LDUuODQuNzksOS4wNy41MywzLjIzLDEuNDQsNi4zOSwyLjczLDkuNDksMS4yOSwzLjA5LDMuMDcsNS45MSw1LjMzLDguNDVzNS4xMSw0LjU3LDguNTUsNi4wOWMzLjQ0LDEuNTIsNy41NiwyLjI5LDEyLjM2LDIuMjksNi40MiwwLDExLjk5LTEuNCwxNi43Mi00LjE5LDMuMjQtMS45MSw1Ljk2LTQuNCw4LjItNy40NHY5LjY5aDExLjAxdi03NC43N2gtMTIuMzl2MzkuMzlaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTE0OC4xLDYzNmMtNS4wMS0zLjQ0LTEwLjk3LTUuMTYtMTcuOS01LjE2cy0xMi45MywxLjcxLTE3Ljc2LDUuMTJjLTIuMTQsMS41Mi00LjAzLDMuMy01LjcxLDUuMzF2LTguMzZoLTExLjAxdjEwOC4wMWgxMi4zOXYtNDAuMThjMS4zMSwxLjM5LDIuNzMsMi42Nyw0LjI5LDMuOCw0LjgsMy40OSwxMC43MSw1LjIzLDE3LjcyLDUuMjNzMTIuOTYtMS43NCwxNy45Ni01LjIzYzUuMDEtMy40OCw4Ljg1LTguMiwxMS41My0xNC4xNnM0LjAyLTEyLjY3LDQuMDItMjAuMTUtMS4zNC0xNC4xOS00LjAyLTIwLjE1Yy0yLjY4LTUuOTUtNi41Mi0xMC42NS0xMS41My0xNC4wOVpNMTE0OC4xNCw2ODQuNmMtMS42Miw0LjI3LTQuMDQsNy42NS03LjI3LDEwLjE0LTMuMjMsMi40OS03LjMyLDMuNzQtMTIuMjUsMy43NHMtOS4xNi0xLjIxLTEyLjM5LTMuNjNjLTMuMjMtMi40Mi01LjYyLTUuNzctNy4xNy0xMC4wNC0xLjU1LTQuMjctMi4zMi05LjEzLTIuMzItMTQuNTdzLjc4LTEwLjQyLDIuMzUtMTQuNjRjMS41Ny00LjIyLDMuOTUtNy41Miw3LjEzLTkuOSwzLjE5LTIuMzgsNy4yLTMuNTYsMTIuMDUtMy41NnM5LjI2LDEuMjUsMTIuNTcsMy43NGMzLjMsMi40OSw1Ljc1LDUuODYsNy4zNCwxMC4xMSwxLjU5LDQuMjUsMi4zOSw5LDIuMzksMTQuMjZzLS44MSwxMC4xLTIuNDIsMTQuMzdaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTIyNy43NCw2MzZjLTUuMDEtMy40NC0xMC45Ny01LjE2LTE3LjktNS4xNnMtMTIuOTQsMS43MS0xNy43Niw1LjEyYy0yLjE0LDEuNTItNC4wNCwzLjMtNS43MSw1LjMxdi04LjM2aC0xMS4wMXYxMDguMDFoMTIuMzl2LTQwLjE4YzEuMzEsMS4zOSwyLjczLDIuNjcsNC4yOSwzLjgsNC44LDMuNDksMTAuNzEsNS4yMywxNy43Miw1LjIzczEyLjk2LTEuNzQsMTcuOTctNS4yM2M1LjAxLTMuNDgsOC44NS04LjIsMTEuNTMtMTQuMTZzNC4wMi0xMi42Nyw0LjAyLTIwLjE1LTEuMzQtMTQuMTktNC4wMi0yMC4xNWMtMi42OC01Ljk1LTYuNTItMTAuNjUtMTEuNTMtMTQuMDlaTTEyMjcuNzcsNjg0LjZjLTEuNjIsNC4yNy00LjA0LDcuNjUtNy4yNywxMC4xNC0zLjIzLDIuNDktNy4zMiwzLjc0LTEyLjI1LDMuNzRzLTkuMTYtMS4yMS0xMi4zOS0zLjYzYy0zLjIzLTIuNDItNS42Mi01Ljc3LTcuMTctMTAuMDQtMS41NC00LjI3LTIuMzItOS4xMy0yLjMyLTE0LjU3cy43OC0xMC40MiwyLjM1LTE0LjY0YzEuNTctNC4yMiwzLjk1LTcuNTIsNy4xMy05LjksMy4xOC0yLjM4LDcuMi0zLjU2LDEyLjA1LTMuNTZzOS4yNiwxLjI1LDEyLjU3LDMuNzRjMy4zLDIuNDksNS43NSw1Ljg2LDcuMzQsMTAuMTEsMS41OSw0LjI1LDIuMzksOSwyLjM5LDE0LjI2cy0uODEsMTAuMS0yLjQyLDE0LjM3WiIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzMTIuMTUsNjQ1LjQ1Yy0yLjEyLTQuODktNS42Mi04LjU1LTEwLjQ5LTEwLjk3LTQuODctMi40Mi0xMC43LTMuNjQtMTcuNDgtMy42NC04LjQ1LDAtMTUuMjUsMS44Ny0yMC40Miw1LjYxLTUuMTcsMy43NC04LjY1LDguODktMTAuNDUsMTUuNDRsMTEuNywzLjUzYzEuMzktNC42MSwzLjc3LTcuOTUsNy4xNy0xMCwzLjM5LTIuMDUsNy4zNS0zLjA4LDExLjg3LTMuMDgsNi44MywwLDExLjY0LDEuNTksMTQuNDQsNC43OCwyLjUxLDIuODYsMy44Myw3LjE0LDMuOTcsMTIuOC0yLjYzLjM2LTUuMzYuNzMtOC4yMiwxLjExLTQuNTIuNi04Ljk5LDEuMjYtMTMuNCwxLjk3LTQuNDEuNzItOC4zOSwxLjU2LTExLjk0LDIuNTMtMy43OCwxLjExLTcuMDQsMi42Mi05Ljc2LDQuNTQtMi43MiwxLjkyLTQuODQsNC4zMi02LjM0LDcuMi0xLjUsMi44OS0yLjI1LDYuMjktMi4yNSwxMC4yMXMuOTYsNy43MSwyLjg3LDExLjA4YzEuOTEsMy4zNyw0Ljc1LDYuMDgsOC41Miw4LjE0LDMuNzYsMi4wNSw4LjQzLDMuMDgsMTQuMDIsMy4wOCw3LjI1LDAsMTMuNC0xLjU1LDE4LjQ1LTQuNjQsMy42Ny0yLjI1LDYuNzUtNS4yOSw5LjI0LTkuMXYxMS42NmgxMC45NHYtNDYuMjVjMC0yLjk1LS4xNC01Ljc4LS40Mi04LjQ4LS4yOC0yLjctLjk1LTUuMi0yLjAxLTcuNTFaTTEzMDEuMDgsNjgyLjIyYy0uNiwzLjA5LTEuODksNS45NC0zLjg4LDguNTUtMS45OSwyLjYxLTQuNiw0LjcxLTcuODYsNi4zcy03LjEsMi4zOS0xMS41MywyLjM5Yy0zLjU1LDAtNi40My0uNTgtOC42Mi0xLjczLTIuMTktMS4xNS0zLjgxLTIuNjUtNC44NC00LjUtMS4wNC0xLjg0LTEuNTYtMy43OC0xLjU2LTUuODEsMC0yLjM1LjU0LTQuMzMsMS42My01LjkyczIuNTItMi45LDQuMjktMy45MWMxLjc3LTEuMDEsMy42OC0xLjg0LDUuNzEtMi40OSwyLjc3LS43OCw1Ljg4LTEuNDcsOS4zNS0yLjA0LDMuNDYtLjU4LDcuMTMtMS4xMiwxMS4wMS0xLjYzLDIuNDgtLjMyLDQuOTktLjY2LDcuNTMtMS0uMDIsMS4xNy0uMDQsMi41Mi0uMDgsNC4wOS0uMDcsMi44NC0uNDUsNS40MS0xLjE0LDcuNzJaIi8+Cjwvc3ZnPg==" alt="Elävä Kauppa">
     <h1 class="ek-perus">Päivän poiminnat<br><span class="ek-korostus">verkkokaupastamme</span></h1>
     <div class="ek-gw">
       <h1>Elävän Green Week 23.-29.11.</h1>
@@ -101,6 +103,100 @@
     </div></div>
   </footer>
 </div>
-<script type="module">import { kaynnista } from "./assets/naytto.mjs"; kaynnista();</script>
+<script>
+// Diginäytön logiikka. Puhtaat funktiot viedään testejä varten, selainosa ajetaan vain sivulla.
+// Paikallisessa esikatselussa (serve.mjs) syöte tulee samalta palvelimelta.
+const FEED_URL = "https://ek-diginaytto.elava.workers.dev/v1/naytto";
+const SITE = "https://www.elavakauppa.fi";
+const PAIVITYS_MIN = 30;
+const PX_SEKUNNISSA = 100; // 35 s ehtii näyttää noin 13 korttia, ja kukin on ruudulla yli 10 s
+const KUVA_AIKARAJA_MS = 8000;
+const ESILATAUS = 8;
+
+// Green Week -ilme: ti 24.11. klo 00:00 - su 29.11. Suomen aikaa. Ennen ja jälkeen perusnäkymä, vaihtuu itsestään (tarkistetaan minuutin välein).
+const GW_ALKU = "2026-11-24";
+const GW_LOPPU = "2026-11-29";
+function greenWeekKaynnissa(nyt = new Date()) {
+  const pv = typeof nyt === "string" ? nyt : nyt.toLocaleDateString("sv-SE", { timeZone: "Europe/Helsinki" });
+  return pv >= GW_ALKU && pv <= GW_LOPPU;
+}
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const eur = (n) => (Math.round(n * 100) % 100 === 0 ? String(Math.round(n)) : n.toFixed(2).replace(".", ",")) + " €";
+const kuvaUrl = (s) => (/^https?:\/\//i.test(s) ? s : SITE + (String(s).startsWith("/") ? "" : "/") + s);
+
+function korttiHtml(p) {
+  const ale = p.normal != null;
+  return `<article class="ek-kortti${ale ? " ek-kortti--ale" : ""}">
+    <div class="ek-kortti__kuva"><img src="${esc(kuvaUrl(p.image))}" alt=""></div>
+    ${ale ? `<span class="ek-lappu">-${esc(p.percent)}&nbsp;%</span>` : ""}
+    <div class="ek-kortti__merkki">${esc(p.osasto)}</div>
+    <div class="ek-kortti__nimi">${esc(p.name)}</div>
+    <div class="ek-kortti__hinta"><b>${eur(p.price)}</b>${ale ? `<s>${eur(p.normal)}</s>` : ""}</div>
+  </article>`;
+}
+
+// Tyhjä tai viallinen vastaus palauttaa null, jolloin vanha sisältö jää näkyviin.
+function kelvollinenSyote(data) {
+  const items = data?.items;
+  if (!Array.isArray(items) || !items.length) return null;
+  const ok = items.filter((p) => p && p.name && p.image && typeof p.price === "number");
+  return ok.length ? ok : null;
+}
+
+const preload = (src) => new Promise((res) => {
+  const im = new Image(); const t = setTimeout(res, KUVA_AIKARAJA_MS);
+  im.onload = im.onerror = () => { clearTimeout(t); res(); };
+  im.src = src;
+});
+
+function piirra(items, doc) {
+  const html = items.map(korttiHtml).join("");
+  doc.getElementById("grid-a").innerHTML = html;
+  doc.getElementById("grid-b").innerHTML = html; // toinen kopio saumattomaan silmukkaan
+  const track = doc.getElementById("track");
+  track.style.animation = "none"; void track.offsetHeight;
+  track.style.animation = "";
+  track.style.animationDuration = Math.round(doc.getElementById("grid-a").offsetHeight / PX_SEKUNNISSA) + "s";
+}
+
+const AVAIN = "ek-naytto-syote";
+const lueVarasto = () => { try { return kelvollinenSyote(JSON.parse(localStorage.getItem(AVAIN))); } catch { return null; } };
+const kirjoitaVarasto = (data) => { try { localStorage.setItem(AVAIN, JSON.stringify(data)); } catch { /* ei haittaa */ }};
+
+async function paivita(doc = document) {
+  try {
+    const r = await fetch(FEED_URL, { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    const items = kelvollinenSyote(data);
+    if (!items) throw new Error("tyhjä syöte");
+    // Vain ensimmäiset kortit odotetaan (näkyvä alue), loput latautuvat vierityksen aikana.
+    await Promise.race([Promise.all(items.slice(0, ESILATAUS).map((p) => preload(kuvaUrl(p.image)))), new Promise((r) => setTimeout(r, 3000))]);
+    piirra(items, doc);
+    kirjoitaVarasto({ items });
+    items.slice(ESILATAUS).forEach((p) => preload(kuvaUrl(p.image)));
+  } catch (e) {
+    console.error("päivitys epäonnistui, vanha sisältö jää", e); // ei tyhjennä näyttöä
+  }
+}
+
+function paivitaGreenWeek(doc = document) {
+  const o = new URLSearchParams(location.search).get("gw_date");
+  const nyt = o && /^\d{4}-\d{2}-\d{2}$/.test(o) ? o : new Date();
+  doc.body.dataset.gw = greenWeekKaynnissa(nyt) ? "paalla" : "pois";
+}
+
+function kaynnista() {
+  paivitaGreenWeek();
+  setInterval(paivitaGreenWeek, 60 * 1000);
+  const vanha = lueVarasto(); // edellinen sisältö heti näkyviin, uusi haetaan sillä välin
+  if (vanha) piirra(vanha, document);
+  paivita();
+  setInterval(paivita, PAIVITYS_MIN * 60 * 1000);
+}
+
+kaynnista();
+</script>
 </body>
 </html>
